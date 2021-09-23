@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import * as actions from '../../store/actions';
 import './Login.scss';
+import { handleLoginApi } from 'services/userService';
 // import { FormattedMessage } from 'react-intl';
 
-// import adminService from "../../services/adminService";
 const PASSWORD = 'password';
 class Login extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class Login extends Component {
     this.state = {
       userName: '',
       password: '',
+      errMessage: '',
     };
   }
   handleOnChange = (e) => {
@@ -21,8 +22,21 @@ class Login extends Component {
     if (name === 'userName') this.setState({ ...this.state, userName: value });
     else this.setState({ ...this.state, password: value });
   };
-  handleLogin = () => {
-    console.log('this.state: ', this.state);
+  handleLogin = async () => {
+    this.setState({ errMessage: '' });
+    try {
+      const data = await handleLoginApi(
+        this.state.userName,
+        this.state.password
+      );
+      if (data && data.errCode !== 0)
+        this.setState({ errMessage: data.message });
+
+      if (data && data.errCode === 0) this.props.userLoginSuccess(data.user);
+    } catch (err) {
+      if (err.response && err.response.data)
+        this.setState({ errMessage: err.response.data.message });
+    }
   };
   toggleShowPassword = () => {
     const passwordEle = document.querySelector('#password');
@@ -57,6 +71,7 @@ class Login extends Component {
                   placeholder='Enter your user name'
                   value={this.state.userName}
                   onChange={(e) => this.handleOnChange(e)}
+                  autoComplete='on'
                 />
               </div>
             </div>
@@ -78,9 +93,13 @@ class Login extends Component {
                 </span>
               </div>
             </div>
+            <div className={`error-msg ${this.state.errMessage ? '' : 'hide'}`}>
+              {this.state.errMessage}
+            </div>
             <div className='col-12 form-group'>
               <span className='forgot-btn'>Forgot your password?</span>
             </div>
+
             <div className='col-12 btn-area form-group'>
               <button className='login-btn' onClick={this.handleLogin}>
                 Login
@@ -112,9 +131,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    // userLoginFail: () => dispatch(actions.userLoginFail()),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 

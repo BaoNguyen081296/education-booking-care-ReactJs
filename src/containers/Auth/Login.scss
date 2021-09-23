@@ -79,8 +79,16 @@
                 display: none;
             }
         }
+        .error-msg {
+            font-size: 0.9rem;
+            color: red;
+            margin-bottom: 0.5rem;
+        }
         @media screen and (max-width: $screen-sm) {
             flex-basis: 60%;
         }
+    }
+    .hide {
+        display: none;
     }
 }
