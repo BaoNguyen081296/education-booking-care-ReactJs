@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import * as actions from '../../store/actions';
 import './Login.scss';
 import { handleLoginApi } from 'services/userService';
+import { KeyCodeUtils } from 'utils';
 // import { FormattedMessage } from 'react-intl';
 
 const PASSWORD = 'password';
@@ -52,6 +53,19 @@ class Login extends Component {
       eyeSlashEle.classList.remove('hide');
     }
   };
+  handleKeyPress = (e) => {
+    const keyCode = e.which || e.keyCode;
+    if (keyCode === KeyCodeUtils.ENTER) {
+      e.preventDefault();
+      this.handleLogin();
+    }
+  };
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyPress);
+  }
   render() {
     return (
       <div className='login-background'>
@@ -75,7 +89,7 @@ class Login extends Component {
                 />
               </div>
             </div>
-            <div className='col-12 form-group'>
+            <div className='col-12'>
               <label htmlFor='password'>Password:</label>
               <div className='password input-wrapper'>
                 <input
@@ -93,15 +107,19 @@ class Login extends Component {
                 </span>
               </div>
             </div>
-            <div className={`error-msg ${this.state.errMessage ? '' : 'hide'}`}>
-              {this.state.errMessage}
+            <div className='error-msg msg'>
+              <span>{this.state.errMessage}</span>
             </div>
-            <div className='col-12 form-group'>
+            <div className='col-12 form-group msg'>
               <span className='forgot-btn'>Forgot your password?</span>
             </div>
 
             <div className='col-12 btn-area form-group'>
-              <button className='login-btn' onClick={this.handleLogin}>
+              <button
+                type='submit'
+                className='login-btn'
+                onClick={this.handleLogin}
+              >
                 Login
               </button>
             </div>

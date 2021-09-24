@@ -82,7 +82,11 @@
         .error-msg {
             font-size: 0.9rem;
             color: red;
-            margin-bottom: 0.5rem;
+            margin: 0.4rem 0 0.5rem;
+            height: 1rem;
+        }
+        .msg {
+            padding-left: 1rem;
         }
         @media screen and (max-width: $screen-sm) {
             flex-basis: 60%;
