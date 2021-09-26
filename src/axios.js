@@ -53,10 +53,11 @@ instance.interceptors.response.use(
     // }
     return data;
   },
-  (error) => {
-    if (error && error.response.data) {
-      console.log('error: ', error.response.data);
-      return error.response.data;
+  (err) => {
+    console.log('err.respone: ', err.respone);
+    if (err && err.response?.data) {
+      console.log('err: ', err.response.data);
+      return err.response.data;
     }
   }
 );
