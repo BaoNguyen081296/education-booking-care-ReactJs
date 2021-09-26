@@ -1,5 +1,5 @@
 @import "../styles/common.scss";
-@import "./share-variables";
+@import "~bootstrap/scss/bootstrap";
 ._app {
     // background-color: $background-color-app;
     a {
@@ -25,62 +25,6 @@
             margin-right: 12rem;
         }
     }
-
-    .page-wrapper {
-        margin-top: $height-header;
-        // background-color: cornflowerblue;
-        // @media screen and (max-width: 1000px) {
-        //     padding: 0;
-        //     padding-top: 5px;
-        // }
-    }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-ul {
-    list-style-type: none;
-}
-
-.c-pointer {
-    cursor: pointer;
-}
-
-.react-confirm-alert-overlay {
-    z-index: 11111 !important;
-    animation: react-confirm-alert-fadeIn 0.05s 0.05s forwards !important;
-
-    h1 {
-        font-size: 1.25rem;
-    }
-
-    .react-confirm-alert-button-group {
-        justify-content: flex-end;
-
-        button:last-of-type {
-            background-color: #1a79b8;
-            border-color: #1a79b8;
-            color: #fff;
-        }
-
-        .invoice-check-button {
-            margin-right: 107px;
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
-        }
-    }
-}
-
-input::placeholder {
-    text-align: left;
 }
 
 ._noselect {

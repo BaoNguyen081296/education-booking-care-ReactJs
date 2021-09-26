@@ -17,7 +17,7 @@ import Home from '../routes/Home';
 
 import Header from './Header/Header';
 import System from '../routes/System';
-
+import './App.scss';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import Login from './Auth/Login';
@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <Fragment>
         <Router history={history}>
-          <div className='main-container'>
+          <div className='_app main-container'>
             <ConfirmModal />
             {this.props.isLoggedIn && <Header />}
 
