@@ -12,19 +12,27 @@ const initValue = {
   sex: 1,
   roleId: 1,
 };
-const UserManageModal = ({ toggle, show = false, onSubmit, userInfo }) => {
+const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
   const [errMSG, setErrMSG] = useState(null);
   const [objData, setObjData] = useState(initValue);
-
   const checkValidData = (data) => {
     const keys = [
       { key: 'email', msg: 'Email' },
-      { key: 'Password', msg: 'password' },
+      { key: 'password', msg: 'Password' },
       { key: 'firstName', msg: 'First name' },
       { key: 'lastName', msg: 'Last name' },
       { key: 'address', msg: 'Address' },
       { key: 'phoneNumber', msg: 'Phone number' },
     ];
+    for (let i = 0; i < keys.length; i++) {
+      const { key, msg } = keys[i];
+      if (!data[key]) {
+        setErrMSG(msg + ' is required!');
+        return false;
+      }
+    }
+    setErrMSG('');
+    return true;
   };
 
   const handleUpdateData = useCallback(
@@ -36,19 +44,24 @@ const UserManageModal = ({ toggle, show = false, onSubmit, userInfo }) => {
   );
 
   const handleCloseModal = useCallback(() => {
-    toggle();
+    closeModal();
     setTimeout(() => {
+      setErrMSG(null);
       setObjData(initValue);
     }, 300);
-  }, [toggle]);
+  }, [closeModal]);
 
   const handleSubmit = useCallback(() => {
-    handleCloseModal();
-  }, [handleCloseModal]);
+    const isValid = checkValidData(objData);
+    if (isValid) {
+      onSubmit(objData);
+    }
+  }, [objData, onSubmit]);
 
   useEffect(() => {
     if (userInfo) setObjData(userInfo);
-  }, [userInfo]);
+    else setObjData(initValue);
+  }, [show, userInfo]);
 
   return (
     <Modal
@@ -171,6 +184,7 @@ const UserManageModal = ({ toggle, show = false, onSubmit, userInfo }) => {
               </div>
             </Form>
           </div>
+          <div className='err-msg'>{errMSG}</div>
         </div>
       </Modal.Body>
       <Modal.Footer>

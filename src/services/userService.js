@@ -1,13 +1,21 @@
 import axios from '../axios';
-
+import urls from 'configs/urls';
 export const handleLoginApi = async (email, password) => {
-  return axios.post(`/api/login`, { email, password });
+  return axios.post(urls.user.login, { email, password });
 };
 
 export const getAllUsers = (id) => {
-  return axios.get('/api/get-all-users', {
+  return axios.get(urls.user.list, {
     params: {
       id,
     },
   });
+};
+export const manageUser = (data) => {
+  return axios.post(urls.user.create, data);
+  // return axios.get('/api/get-all-users', {
+  //   params: {
+  //     id: data,
+  //   },
+  // });
 };

@@ -1,44 +1,57 @@
 import React, { Component } from 'react';
 // import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllUsers } from 'services/userService';
+import { getAllUsers, manageUser } from 'services/userService';
 import './UserManage.scss';
 import { Button } from 'react-bootstrap';
 import UserManageModal from './partials/UserManageModal';
+
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: [],
-      show: true,
+      show: false,
       userInfo: null,
     };
   }
 
   async componentDidMount() {
+    this.getAllUsersFromUserManage();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('didupdate');
+  }
+
+  getAllUsersFromUserManage = async () => {
     const res = await getAllUsers();
     if (res && res.errCode === 0) {
       this.setState({
         user: res.data,
       });
     }
-  }
-
-  toggleModal = () => {
-    if (this.state.show) {
-      this.setState({
-        show: !this.state.show,
-        userInfo: null,
-      });
-    } else {
-      this.setState({
-        show: !this.state.show,
-      });
-    }
   };
 
-  handleSubmit = () => {
-    this.toggleModal();
+  closeModal = () => {
+    this.setState({ show: false, userInfo: null });
+  };
+
+  handleSubmit = async (data) => {
+    try {
+      const res = await manageUser(data);
+      if (res) {
+        const { errCode, message } = res;
+        if (errCode === 0) {
+          this.getAllUsersFromUserManage();
+          this.setState({ show: false, userInfo: null });
+        } else {
+          alert(message);
+        }
+      }
+    } catch (e) {
+      console.log('e: ', e);
+    }
   };
 
   render() {
@@ -48,7 +61,11 @@ class UserManage extends Component {
           <div className='user-manage-title'>
             <h2 className='text-center'>Manage users</h2>
             <div className='create-user'>
-              <Button onClick={this.toggleModal}>
+              <Button
+                onClick={() => {
+                  this.setState({ show: true, userInfo: null });
+                }}
+              >
                 <i className='fas fa-user-plus'></i> Create new user
               </Button>
             </div>
@@ -94,7 +111,7 @@ class UserManage extends Component {
         <UserManageModal
           {...{
             show: this.state.show,
-            toggle: this.toggleModal,
+            closeModal: this.closeModal,
             userInfo: this.state.userInfo,
             onSubmit: this.handleSubmit,
           }}
