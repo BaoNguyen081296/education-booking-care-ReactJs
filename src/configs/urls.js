@@ -8,6 +8,7 @@ const urls = {
     list: '/user/list',
     update: '/user/update',
     create: '/user/create',
+    delete: '/user/delete',
     // changePass: '/api/user/change-pass',
     // refresh: '/api/v2/user/refresh',
     // settings: '/api/v2/user/settings',

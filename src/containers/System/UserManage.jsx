@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllUsers, manageUser } from 'services/userService';
+import { deleteUser, getAllUsers, manageUser } from 'services/userService';
 import './UserManage.scss';
 import { Button } from 'react-bootstrap';
 import UserManageModal from './partials/UserManageModal';
-
+// import { emmiter } from 'utils/emitter';
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -45,12 +45,28 @@ class UserManage extends Component {
         if (errCode === 0) {
           this.getAllUsersFromUserManage();
           this.setState({ show: false, userInfo: null });
+          // emmiter.emit()
         } else {
           alert(message);
         }
       }
     } catch (e) {
       console.log('e: ', e);
+    }
+  };
+
+  handleDeleteUser = async (id) => {
+    try {
+      const res = await deleteUser(id);
+      if (res) {
+        const { errCode, message } = res;
+        if (errCode === 0) {
+          this.getAllUsersFromUserManage();
+          console.log('message: ', message);
+        }
+      }
+    } catch (error) {
+      console.log('error: ', error);
     }
   };
 
@@ -99,7 +115,12 @@ class UserManage extends Component {
                     >
                       <i className='fas fa-user-edit'></i>
                     </Button>
-                    <Button variant='danger'>
+                    <Button
+                      variant='danger'
+                      onClick={() => {
+                        this.handleDeleteUser(item.id);
+                      }}
+                    >
                       <i className='fas fa-trash'></i>
                     </Button>
                   </td>

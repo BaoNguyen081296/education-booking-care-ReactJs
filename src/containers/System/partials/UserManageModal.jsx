@@ -15,25 +15,28 @@ const initValue = {
 const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
   const [errMSG, setErrMSG] = useState(null);
   const [objData, setObjData] = useState(initValue);
-  const checkValidData = (data) => {
-    const keys = [
-      { key: 'email', msg: 'Email' },
-      { key: 'password', msg: 'Password' },
-      { key: 'firstName', msg: 'First name' },
-      { key: 'lastName', msg: 'Last name' },
-      { key: 'address', msg: 'Address' },
-      { key: 'phoneNumber', msg: 'Phone number' },
-    ];
-    for (let i = 0; i < keys.length; i++) {
-      const { key, msg } = keys[i];
-      if (!data[key]) {
-        setErrMSG(msg + ' is required!');
-        return false;
+  const checkValidData = useCallback(
+    (data) => {
+      const keys = [
+        { key: 'email', msg: 'Email' },
+        ...(userInfo ? [] : [{ key: 'password', msg: 'Password' }]),
+        { key: 'firstName', msg: 'First name' },
+        { key: 'lastName', msg: 'Last name' },
+        { key: 'address', msg: 'Address' },
+        { key: 'phoneNumber', msg: 'Phone number' },
+      ];
+      for (let i = 0; i < keys.length; i++) {
+        const { key, msg } = keys[i];
+        if (!data[key]) {
+          setErrMSG(msg + ' is required!');
+          return false;
+        }
       }
-    }
-    setErrMSG('');
-    return true;
-  };
+      setErrMSG('');
+      return true;
+    },
+    [userInfo]
+  );
 
   const handleUpdateData = useCallback(
     (e) => {
@@ -56,7 +59,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
     if (isValid) {
       onSubmit(objData);
     }
-  }, [objData, onSubmit]);
+  }, [checkValidData, objData, onSubmit]);
 
   useEffect(() => {
     if (userInfo) setObjData(userInfo);
@@ -94,12 +97,13 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                   type='email'
                   placeholder='Enter your email'
                   defaultValue={objData.email}
+                  readOnly={userInfo ? true : false}
                 />
                 {/* <Form.Text className='text-muted'>
                     We'll never share your email with anyone else.
                   </Form.Text> */}
               </Form.Group>
-              {
+              {!userInfo && (
                 <Form.Group className='mb-3' controlId='password'>
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -108,7 +112,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                     defaultValue={objData.password}
                   />
                 </Form.Group>
-              }
+              )}
               <div className='row mb-3'>
                 <div className='col-6'>
                   <Form.Group className='' controlId='firstName'>
