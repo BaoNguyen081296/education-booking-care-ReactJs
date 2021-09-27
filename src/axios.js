@@ -1,9 +1,10 @@
 import axios from 'axios';
+import urls from 'configs/urls';
 // import _ from 'lodash';
 // import config from './config';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: urls.baseURL,
   //   withCredentials: true,
 });
 
