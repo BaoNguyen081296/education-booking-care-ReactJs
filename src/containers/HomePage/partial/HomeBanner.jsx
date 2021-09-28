@@ -1,7 +1,9 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import './HomeBanner.scss';
 // import background from '../../../assets/icons/icon-banner/icon-banner-1.png';
 export default function HomeBanner() {
+  const intl = useIntl();
   const bottomContent = [
     {
       content1: 'Khám',
@@ -36,12 +38,22 @@ export default function HomeBanner() {
           <div className='_home-banner-top'>
             <div className='top-content'>
               <div className='top-content-title'>
-                <div className='title-1'>NỀN TẢNG Y TẾ</div>
-                <div className='title-2'>CHĂM SÓC SỨC KHỎE TOÀN DIỆN</div>
+                <div className='title-1'>
+                  <FormattedMessage id='homeBanner.title1' />
+                </div>
+                <div className='title-2'>
+                  {' '}
+                  <FormattedMessage id='homeBanner.title2' />
+                </div>
               </div>
               <div className='top-content-search'>
                 <i className='fa fa-search'></i>
-                <input type='text' placeholder='Tìm chuyên khoa khám bệnh' />
+                <input
+                  type='text'
+                  placeholder={intl.formatMessage({
+                    id: 'homeBanner.inputPlaceholder',
+                  })}
+                />
               </div>
             </div>
             <div className='top-content-app'></div>
@@ -64,8 +76,13 @@ export default function HomeBanner() {
                       }}
                     ></div>
                     <div className='content'>
-                      {item.content1}
-                      <br /> {item.content2}
+                      <FormattedMessage
+                        id={`homeBanner.bottomContent.content${idx + 1}.item1`}
+                      />
+                      <br />{' '}
+                      <FormattedMessage
+                        id={`homeBanner.bottomContent.content${idx + 1}.item2`}
+                      />
                     </div>
                   </li>
                 );

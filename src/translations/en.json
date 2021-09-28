@@ -10,6 +10,37 @@
         "checkHealth": "General internal medicine",
         "support": "Support"
     },
+    "homeBanner": {
+        "title1": "MEDICAL BACKGROUND",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "inputPlaceholder": "Find a medical specialty",
+        "bottomContent": {
+            "content1": {
+                "item1": "Specialist",
+                "item2": "examination"
+            },
+            "content2": {
+                "item1": "Remote",
+                "item2": "examination"
+            },
+            "content3": {
+                "item1": "General",
+                "item2": "examination"
+            },
+            "content4": {
+                "item1": "Medical",
+                "item2": "tests"
+            },
+            "content5": {
+                "item1": "Mental",
+                "item2": "health"
+            },
+            "content6": {
+                "item1": "Dental",
+                "item2": "examination"
+            }
+        }
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
