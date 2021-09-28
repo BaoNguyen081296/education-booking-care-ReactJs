@@ -3,7 +3,10 @@ import React from 'react';
 import './HomeHeader.scss';
 import vnFlag from 'assets/images/flag-vn.jpg';
 import enFlag from 'assets/images/flag-en.jpg';
+import { useSelector } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 export default function HomeHeader() {
+  const language = useSelector((state) => state.app.language);
   return (
     <div className='_home-header'>
       <div className='_home-header-container'>
@@ -19,27 +22,43 @@ export default function HomeHeader() {
           <div className='center-content'>
             <div className='child-content'>
               <div className='sub-title1'>
-                <b>Chuyên khoa</b>
+                <b>
+                  <FormattedMessage id='homeHeader.speciality' />
+                </b>
               </div>
-              <div className='sub-title2'>Tìm bác sĩ theo chuyên khoa</div>
+              <div className='sub-title2'>
+                <FormattedMessage id='homeHeader.searchDoctor' />
+              </div>
             </div>
             <div className='child-content'>
               <div className='sub-title1'>
-                <b>Cơ sở y tế</b>
+                <b>
+                  <FormattedMessage id='homeHeader.healthFacility' />
+                </b>
               </div>
-              <div className='sub-title2'>Chọn bệnh viện phòng khám</div>
+              <div className='sub-title2'>
+                <FormattedMessage id='homeHeader.selectRoom' />
+              </div>
             </div>
             <div className='child-content'>
               <div className='sub-title1'>
-                <b>Bác sĩ</b>
+                <b>
+                  <FormattedMessage id='homeHeader.doctor' />
+                </b>
               </div>
-              <div className='sub-title2'>Chọn bác sĩ giỏi</div>
+              <div className='sub-title2'>
+                <FormattedMessage id='homeHeader.selectDoctor' />
+              </div>
             </div>
             <div className='child-content'>
               <div className='sub-title1'>
-                <b>Gói khám</b>
+                <b>
+                  <FormattedMessage id='homeHeader.fee' />
+                </b>
               </div>
-              <div className='sub-title2'>Gói khám sức khỏe tổng quát</div>
+              <div className='sub-title2'>
+                <FormattedMessage id='homeHeader.checkHealth' />
+              </div>
             </div>
           </div>
           {/* End center */}
@@ -48,7 +67,9 @@ export default function HomeHeader() {
           <div className='right-content'>
             <div className='support'>
               <i className='fas fa-question-circle'></i>
-              <b>Hỗ trợ</b>
+              <b>
+                <FormattedMessage id='homeHeader.support' />
+              </b>
             </div>
             <div className='flag'>
               <ImageComponent src={vnFlag} />

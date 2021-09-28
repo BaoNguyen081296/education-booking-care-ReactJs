@@ -1,4 +1,15 @@
 {
+    "homeHeader": {
+        "speciality": "Medical specialty",
+        "searchDoctor": "Find a doctor by specialty",
+        "healthFacility": "Health facilities",
+        "selectRoom": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "selectDoctor": "Choose a good doctor",
+        "fee": "Package",
+        "checkHealth": "General internal medicine",
+        "support": "Support"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
