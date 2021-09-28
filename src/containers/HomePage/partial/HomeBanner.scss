@@ -1,0 +1,83 @@
+@import "/src/styles/variables";
+._home-banner {
+    ._home-banner-bg {
+        background: url("../../../assets/images/banner-cover.jpg") center/cover no-repeat;
+        width: 100%;
+        // height: 485px;
+        // padding: 2rem 0;
+    }
+    ._home-banner-wrapper {
+    }
+    ._home-banner-top {
+        padding: 6rem 0 3rem;
+        min-height: 60vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
+        .top-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .top-content-title {
+            flex-basis: 100%;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 30px;
+            color: white;
+            text-shadow: 1px 1px 1px #333;
+            .title-1 {
+            }
+            .title-2 {
+                font-weight: bold;
+            }
+        }
+        .top-content-search {
+            margin-top: 2rem;
+            border-radius: 50px;
+            overflow: hidden;
+            background: #f7d800;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            input {
+                background: transparent;
+                border: none;
+                padding: 5px 10px;
+                width: 20rem;
+            }
+            i {
+                padding: 5px;
+            }
+        }
+    }
+    ._home-banner-bottom {
+        padding: 1.8rem 0 1.25rem;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+        ul {
+            display: flex;
+            justify-content: center;
+            li {
+                cursor: pointer;
+                text-align: center;
+                flex: 0 1 10%;
+                font-weight: bold;
+                font-size: 1rem;
+                &:hover {
+                    color: $color-btn-hover;
+                    // color: $red-100;
+                }
+            }
+        }
+        .icon {
+            background-size: 32px;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 50px;
+            height: 50px;
+            margin: 2px auto;
+            background-color: white;
+            overflow: hidden;
+            border-radius: 50%;
+            color: black;
+        }
+    }
+}
