@@ -48,7 +48,7 @@ class App extends Component {
           <div className='_app main-container'>
             {this.props.isLoggedIn && <Header />}
 
-            <span className='content-container'>
+            <div className='content-container'>
               <Switch>
                 <Route
                   path={path.LOGIN}
@@ -61,7 +61,7 @@ class App extends Component {
                 <Route path={path.HOME_PAGE} component={HomePage} />
                 <Route path={path.HOME} exact component={Home} />
               </Switch>
-            </span>
+            </div>
 
             <ToastContainer
               className='toast-container'
