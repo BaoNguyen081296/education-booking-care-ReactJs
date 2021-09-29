@@ -4,10 +4,10 @@ export const path = {
   HOME_PAGE: '/home',
   LOGIN: '/login',
   LOG_OUT: '/logout',
-  SYSTEM: { SYSTEM: '/system', USER_MANAGE: '/system/user-mange' },
+  SYSTEM: { SYSTEM: '/system', USER_MANAGE: '/system/user-manage' },
 };
 
-export const languages = {
+export const LANGUAGES = {
   VI: 'vi',
   EN: 'en',
 };

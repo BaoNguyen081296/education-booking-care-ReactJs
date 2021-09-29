@@ -1,12 +1,21 @@
 import ImageComponent from 'components/ImageComponent';
-import React from 'react';
+import React, { useCallback } from 'react';
 import './HomeHeader.scss';
 import vnFlag from 'assets/images/flag-vn.jpg';
 import enFlag from 'assets/images/flag-en.jpg';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from 'utils';
+import { changeLanguageApp } from 'store/actions';
 export default function HomeHeader() {
   const language = useSelector((state) => state.app.language);
+  const dispatch = useDispatch();
+  const handleChangeLanguage = useCallback(
+    (e) => {
+      dispatch(changeLanguageApp(e));
+    },
+    [dispatch]
+  );
   return (
     <div className='_home-header'>
       <div className='_home-header-container'>
@@ -72,8 +81,22 @@ export default function HomeHeader() {
               </b>
             </div>
             <div className='flag'>
-              <ImageComponent src={vnFlag} />
-              <ImageComponent src={enFlag} />
+              <span
+                className={`flag-icon ${
+                  language === LANGUAGES.VI ? 'active' : ''
+                }`}
+                onClick={() => handleChangeLanguage(LANGUAGES.VI)}
+              >
+                <ImageComponent src={vnFlag} />
+              </span>
+              <span
+                className={`flag-icon ${
+                  language === LANGUAGES.EN ? 'active' : ''
+                }`}
+                onClick={() => handleChangeLanguage(LANGUAGES.EN)}
+              >
+                <ImageComponent src={enFlag} />
+              </span>
             </div>
           </div>
         </div>
