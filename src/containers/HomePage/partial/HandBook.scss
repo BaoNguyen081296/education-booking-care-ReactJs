@@ -5,7 +5,7 @@
             flex-wrap: wrap;
             .slider-img {
                 height: 150px;
-                flex-basis: 50%;
+                flex: 0 1 40%;
                 background-size: cover cover;
                 background-repeat: no-repeat;
             }
@@ -13,7 +13,7 @@
                 flex-basis: 50%;
                 font-weight: bold;
                 margin-top: 0rem;
-                padding-left: 1rem;
+                padding-left: 10px;
                 font-size: 1.2rem;
             }
         }

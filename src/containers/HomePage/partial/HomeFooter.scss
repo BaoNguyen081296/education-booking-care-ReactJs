@@ -1,0 +1,10 @@
+@import "../../../styles/variables";
+._home-footer {
+    background-color: $color-footer;
+    ._home-footer-wrapper {
+        padding-top: 1rem;
+        height: 5rem;
+        color: white;
+        font-weight: 500;
+    }
+}
