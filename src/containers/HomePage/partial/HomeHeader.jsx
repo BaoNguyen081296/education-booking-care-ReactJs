@@ -17,9 +17,9 @@ export default function HomeHeader() {
     [dispatch]
   );
   return (
-    <div className='_home-header'>
-      <div className='_home-header-container'>
-        <div className='_home-header-content'>
+    <div className='_home-page-header'>
+      <div className='_home-page-header-container'>
+        <div className='_home-page-header-content'>
           {/* left content */}
           <div className='left-content'>
             <i className='fas fa-bars c-pointer'></i>

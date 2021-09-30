@@ -1,5 +1,6 @@
 @import "/src/styles/variables";
 ._home-banner {
+    margin-top: $height-header;
     ._home-banner-bg {
         background: url("../../../assets/images/banner-cover.jpg") center/cover no-repeat;
         width: 100%;
@@ -9,7 +10,7 @@
     ._home-banner-wrapper {
     }
     ._home-banner-top {
-        padding: 6rem 0 3rem;
+        // padding: 0rem 0 3rem;
         min-height: 60vh;
         background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
         .top-content {

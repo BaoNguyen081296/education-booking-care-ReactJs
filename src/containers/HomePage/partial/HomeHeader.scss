@@ -1,9 +1,16 @@
-._home-header {
-    ._home-header-container {
-        height: 60px;
+@import "../../../styles/variables";
+._home-page-header {
+    height: $height-header;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 0px 5px 1px rgba(black, 0.6);
+    z-index: 99;
+    ._home-page-header-container {
+        height: 100%;
         width: 100%;
     }
-    ._home-header-content {
+    ._home-page-header-content {
         height: 100%;
         display: flex;
         padding: 0 5rem;
