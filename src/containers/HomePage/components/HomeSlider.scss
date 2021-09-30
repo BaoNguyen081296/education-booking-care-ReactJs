@@ -1,0 +1,21 @@
+@import "../../../styles/variables";
+._home-slider {
+    .slick-slide {
+        overflow: hidden !important;
+    }
+    .item {
+        cursor: pointer;
+        &:hover {
+            color: $color-btn-hover;
+        }
+        .item-child1 {
+            margin-top: 1rem;
+        }
+        img {
+            width: 100%;
+        }
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}

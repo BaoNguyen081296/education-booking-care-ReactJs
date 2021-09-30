@@ -1,0 +1,19 @@
+._outstanding-doctor {
+    ._outstanding-doctor-slider {
+        .item {
+            text-align: center;
+            &:hover {
+                .item-child2 {
+                    color: black;
+                }
+            }
+        }
+        .slider-img {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            margin: auto;
+            overflow: hidden;
+        }
+    }
+}

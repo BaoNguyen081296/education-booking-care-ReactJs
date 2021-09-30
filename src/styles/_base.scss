@@ -9,6 +9,8 @@ html {
   font-family: $fontmain;
   font-size: $base-size - 2px;
   font-size: 16px;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .btn {

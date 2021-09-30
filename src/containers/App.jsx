@@ -18,10 +18,12 @@ import Home from '../routes/Home';
 import Header from './Header/Header';
 import System from '../routes/System';
 import './App.scss';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import Login from './Auth/Login';
 import HomePage from './HomePage/HomePage';
-
+import CustomScrollbars from 'components/CustomScrollbars';
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -49,18 +51,20 @@ class App extends Component {
             {this.props.isLoggedIn && <Header />}
 
             <div className='content-container'>
-              <Switch>
-                <Route
-                  path={path.LOGIN}
-                  component={userIsNotAuthenticated(Login)}
-                />
-                <Route
-                  path={path.SYSTEM.SYSTEM}
-                  component={userIsAuthenticated(System)}
-                />
-                <Route path={path.HOME_PAGE} component={HomePage} />
-                <Route path={path.HOME} exact component={Home} />
-              </Switch>
+              <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                <Switch>
+                  <Route
+                    path={path.LOGIN}
+                    component={userIsNotAuthenticated(Login)}
+                  />
+                  <Route
+                    path={path.SYSTEM.SYSTEM}
+                    component={userIsAuthenticated(System)}
+                  />
+                  <Route path={path.HOME_PAGE} component={HomePage} />
+                  <Route path={path.HOME} exact component={Home} />
+                </Switch>
+              </CustomScrollbars>
             </div>
 
             <ToastContainer
