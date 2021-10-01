@@ -1,10 +1,13 @@
 export const path = {
-  system: {},
   HOME: '/',
   HOME_PAGE: '/home',
   LOGIN: '/login',
   LOG_OUT: '/logout',
-  SYSTEM: { SYSTEM: '/system', USER_MANAGE: '/system/user-manage' },
+  SYSTEM: {
+    SYSTEM: '/system',
+    USER_MANAGE: '/system/user-manage',
+    USER_REDUX: '/system/user-redux',
+  },
 };
 
 export const LANGUAGES = {
