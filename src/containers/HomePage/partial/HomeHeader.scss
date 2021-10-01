@@ -3,9 +3,11 @@
     height: $height-header;
     position: fixed;
     top: 0;
+    right: 0;
+    left: 0;
     background-color: white;
     box-shadow: 0 0px 5px 1px rgba(black, 0.6);
-    z-index: 99;
+    z-index: 999;
     ._home-page-header-container {
         height: 100%;
         width: 100%;

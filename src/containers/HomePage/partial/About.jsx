@@ -13,9 +13,9 @@ export default function About({ isGray = false }) {
               <iframe
                 src='https://www.youtube-nocookie.com/embed/FyDQljKtWnI'
                 title='YouTube video player'
-                frameborder='0'
+                frameBorder='0'
                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                allowfullscreen='allowfullscreen'
+                allowFullScreen='allowfullscreen'
               ></iframe>
             </div>
           </div>
