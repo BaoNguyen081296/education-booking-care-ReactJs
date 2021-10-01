@@ -1,4 +1,3 @@
-import ImageComponent from 'components/ImageComponent';
 import React from 'react';
 import HomeSlider from '../components/HomeSlider';
 import imgSrc from 'assets/handbook/handbook.jpg';
