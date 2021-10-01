@@ -1,5 +1,6 @@
 import axios from '../axios';
 import urls from 'configs/urls';
+
 export const handleLoginApi = async (email, password) => {
   return axios.post(urls.user.login, { email, password });
 };
@@ -11,6 +12,7 @@ export const getAllUsers = (id) => {
     },
   });
 };
+
 export const manageUser = (data) => {
   return axios.put(data.id ? urls.user.update : urls.user.create, data);
 
