@@ -7,7 +7,11 @@ class UserRedux extends Component {
   componentDidMount() {}
 
   render() {
-    return <div className='text-center'>UserRedux</div>;
+    return (
+      <div className='_user-redux'>
+        <h3 className='text-center'>User Redux</h3>
+      </div>
+    );
   }
 }
 

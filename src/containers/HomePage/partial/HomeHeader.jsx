@@ -1,8 +1,6 @@
-import ImageComponent from 'components/ImageComponent';
 import React from 'react';
 import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGES } from 'utils';
 import FlagLanguage from 'components/FlagLanguage';
 export default function HomeHeader() {
   return (
