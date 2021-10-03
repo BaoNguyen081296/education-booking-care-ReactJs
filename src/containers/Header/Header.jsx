@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../store/actions';
+import * as actions from 'store/actions';
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
@@ -11,7 +11,6 @@ import { FormattedMessage } from 'react-intl';
 class Header extends Component {
   render() {
     const { processLogout, userInfo } = this.props;
-    console.log('userInfo: ', userInfo);
     return (
       <div className='header-container'>
         {/* thanh navigator */}

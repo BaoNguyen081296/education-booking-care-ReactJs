@@ -15,14 +15,16 @@ export const getAllUsers = (id) => {
 
 export const manageUser = (data) => {
   return axios.put(data.id ? urls.user.update : urls.user.create, data);
-
-  // return axios.get('/api/get-all-users', {
-  //   params: {
-  //     id: data,
-  //   },
-  // });
 };
 
 export const deleteUser = (id) => {
   return axios.delete(urls.user.delete, { data: { id } });
+};
+
+export const getAllCode = (type) => {
+  return axios.get(urls.user.allcode, {
+    params: {
+      type,
+    },
+  });
 };

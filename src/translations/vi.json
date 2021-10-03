@@ -67,5 +67,19 @@
             "specialty": "Chuyên khoa",
             "manageSpecialty": "Quản lý chuyên khoa"
         }
+    },
+    "manageUser": {
+        "add": "Thêm mới người dùng",
+        "password": "Mật khẩu",
+        "firstName": "Tên",
+        "lastName": "Họ",
+        "phoneNumber": "Số điện thoại",
+        "address": "Địa chỉ",
+        "gender": "Giới tính",
+        "position": "Chức danh",
+        "roleId": "Vai trò",
+        "image": "Ảnh đại diện",
+        "upload": "Tải ảnh",
+        "save": "Lưu user"
     }
 }

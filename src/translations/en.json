@@ -67,5 +67,19 @@
             "specialty": "Specialties",
             "manageSpecialty": "Manage specialty"
         }
+    },
+    "manageUser": {
+        "add": "Add a new user",
+        "password": "Password",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phoneNumber": "Phone number",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "roleId": "Role Id",
+        "image": "Avata",
+        "upload": "Upload file",
+        "save": "Save"
     }
 }
