@@ -14,6 +14,9 @@ const urls = {
     // refresh: '/api/v2/user/refresh',
     // settings: '/api/v2/user/settings',
   },
+  admin: {
+    login: '/admin/login',
+  },
 };
 
 export default urls;
