@@ -6,12 +6,28 @@ import './UserRedux.scss';
 import * as actions from 'store/actions';
 import ImageComponent from 'components/ImageComponent';
 import { LANGUAGES } from 'utils';
+import ViewImageModal from 'components/ViewImageModal';
+import { createNewUser } from 'services/userService';
+
 class UserRedux extends Component {
   constructor() {
     super();
     this.state = {
       previewImgUrl: null,
       showImg: false,
+      avata: null,
+      userData: {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        address: '',
+        gender: '',
+        position: '',
+        role: '',
+        avata: '',
+      },
     };
   }
 
@@ -22,21 +38,101 @@ class UserRedux extends Component {
       console.log('error: ', error);
     }
   }
+
+  checkValidData = () => {
+    const arrCheck = [
+      'email',
+      'password',
+      'firstName',
+      'lastName',
+      'phoneNumber',
+      'address',
+    ];
+    for (let i = 0; i < arrCheck.length; i++) {
+      if (!this.state.userData[arrCheck[i]]) {
+        alert(arrCheck[i] + ' is required!');
+        return false;
+      }
+    }
+    return true;
+  };
+
   handleReviewImg = (e) => {
     const file = e.target.files[0];
     if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
       const previewImgUrl = URL.createObjectURL(file);
       this.setState({
         previewImgUrl,
+        avata: file,
       });
     } else {
     }
   };
+
   handleShowImg = () => {
     this.setState({
       showImg: true,
     });
   };
+
+  handleSubmit = async (e) => {
+    const isValid = this.checkValidData();
+    if (isValid) {
+      const {
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+        address,
+        gender,
+        position,
+        role,
+        // avata,
+      } = this.state.userData;
+      const res = await createNewUser({
+        email,
+        password,
+        firstName,
+        lastName,
+        address,
+        gender,
+        roleId: role,
+        phoneNumber,
+        positionId: position,
+      });
+      if (res && res.errCode === 0) {
+      }
+      console.log('res: ', res);
+    }
+  };
+  componentDidUpdate(preProps, preState) {
+    const { roles, genders, positions } = this.props;
+    if (
+      preProps.roles.length === 0 &&
+      preProps.genders.length === 0 &&
+      preProps.positions.length === 0 &&
+      roles &&
+      roles.length > 0 &&
+      genders &&
+      genders.length > 0 &&
+      positions.length > 0
+    ) {
+      this.setState({
+        userData: {
+          ...this.state.userData,
+          gender: genders[0].key,
+          role: roles[0].key,
+          position: positions[0].key,
+        },
+      });
+    }
+  }
+  handleOnChange = (e) => {
+    const { id, value } = e.target;
+    this.setState({ userData: { ...this.state.userData, [id]: value } });
+  };
+
   render() {
     const { roles, genders, positions, language } = this.props;
     return (
@@ -52,8 +148,9 @@ class UserRedux extends Component {
             <Form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log('e: ', e);
+                this.handleSubmit();
               }}
+              onChange={this.handleOnChange}
             >
               <Row className='mb-3'>
                 <Form.Group as={Col} controlId='email'>
@@ -101,7 +198,11 @@ class UserRedux extends Component {
               </Row>
 
               <Row className='mb-3'>
-                <Form.Group as={Col} controlId='gender'>
+                <Form.Group
+                  as={Col}
+                  controlId='gender'
+                  defaultValue={genders && genders.length > 0 && genders[0].key}
+                >
                   <Form.Label>
                     <FormattedMessage id='manageUser.gender' />
                   </Form.Label>
@@ -111,7 +212,7 @@ class UserRedux extends Component {
                       genders.map((item, idx) => {
                         if (idx > 1) return null;
                         return (
-                          <option key={idx}>
+                          <option key={idx} value={item.key}>
                             {language === LANGUAGES.EN
                               ? item.valueEn
                               : item.valueVi}
@@ -121,7 +222,13 @@ class UserRedux extends Component {
                   </Form.Select>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId='position'>
+                <Form.Group
+                  as={Col}
+                  controlId='position'
+                  defaultValue={
+                    positions && positions.length > 0 && positions[0].key
+                  }
+                >
                   <Form.Label>
                     <FormattedMessage id='manageUser.position' />
                   </Form.Label>
@@ -129,7 +236,7 @@ class UserRedux extends Component {
                     {positions &&
                       positions.length > 0 &&
                       positions.map((item, idx) => (
-                        <option key={idx}>
+                        <option key={idx} value={item.key}>
                           {language === LANGUAGES.EN
                             ? item.valueEn
                             : item.valueVi}
@@ -137,7 +244,11 @@ class UserRedux extends Component {
                       ))}
                   </Form.Select>
                 </Form.Group>
-                <Form.Group as={Col} controlId='roleId'>
+                <Form.Group
+                  as={Col}
+                  controlId='roleId'
+                  defaultValue={roles && roles.length > 0 && roles[0].key}
+                >
                   <Form.Label>
                     <FormattedMessage id='manageUser.roleId' />
                   </Form.Label>
@@ -145,7 +256,7 @@ class UserRedux extends Component {
                     {roles &&
                       roles.length > 0 &&
                       roles.map((item, idx) => (
-                        <option key={idx}>
+                        <option key={idx} value={item.key}>
                           {language === LANGUAGES.EN
                             ? item.valueEn
                             : item.valueVi}
@@ -153,12 +264,12 @@ class UserRedux extends Component {
                       ))}
                   </Form.Select>
                 </Form.Group>
-                <Form.Group as={Col} controlId='previewImg'>
+                <Form.Group as={Col} controlId='avata'>
                   <Form.Control
+                    name='avata'
                     type='file'
-                    required
+                    // required
                     hidden
-                    name='previewImg'
                     onChange={this.handleReviewImg}
                     // isInvalid={!!errors.file}
                   />
@@ -198,25 +309,6 @@ class UserRedux extends Component {
     );
   }
 }
-const ViewImageModal = ({ showModalImg, dataImg, onHide, ...props }) => {
-  return (
-    <Modal
-      className='product-img-view-modal'
-      size='lg'
-      aria-labelledby='contained-modal-title-vcenter'
-      centered
-      onHide={onHide}
-      show={showModalImg}
-      {...props}
-    >
-      <Modal.Body>
-        <div className='_product-image-modal'>
-          <img className='img-fluid' src={dataImg} alt='' />
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-};
 const mapStateToProps = (state) => {
   return {
     language: state.app.language,
