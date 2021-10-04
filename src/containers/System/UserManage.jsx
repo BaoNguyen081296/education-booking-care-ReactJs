@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 // import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { deleteUser, getAllUsers, manageUser } from 'services/userService';
+import {
+  deleteUser,
+  getAllUsers,
+  editUser,
+  createNewUser,
+} from 'services/userService';
 import './UserManage.scss';
 import { Button } from 'react-bootstrap';
 import UserManageModal from './partials/UserManageModal';
@@ -39,7 +44,13 @@ class UserManage extends Component {
 
   handleSubmit = async (data) => {
     try {
-      const res = await manageUser(data);
+      let res = null;
+      if (data && data.id) {
+        res = await editUser(data);
+      }
+      if (data && !data.id) {
+        res = await createNewUser(data);
+      }
       if (res) {
         const { errCode, message } = res;
         if (errCode === 0) {
