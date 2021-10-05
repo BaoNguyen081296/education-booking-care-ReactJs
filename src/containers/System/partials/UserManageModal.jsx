@@ -1,6 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './UserManageModal.scss';
 import { Form, Button, Modal } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import ImageComponent from 'components/ImageComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from 'store/actions';
+import { LANGUAGES } from 'utils';
+
 // import useDebounce from 'hooks/useDebounce';
 const initValue = {
   email: '',
@@ -9,12 +15,22 @@ const initValue = {
   lastName: '',
   address: '',
   phoneNumber: '',
-  sex: 1,
-  roleId: 1,
+  gender: '',
+  roleId: '',
+  positionId: '',
+  avata: '',
 };
 const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
+  const language = useSelector((state) => state.app.language);
+  const genders = useSelector((state) => state.admin.genders);
+  const roles = useSelector((state) => state.admin.roles);
+  const positions = useSelector((state) => state.admin.positions);
+  const dispatch = useDispatch();
   const [errMSG, setErrMSG] = useState(null);
   const [objData, setObjData] = useState(initValue);
+  const [previewImgUrl, setPreviewImgUrl] = useState('');
+  const [avata, setAvata] = useState('');
+
   const checkValidData = useCallback(
     (data) => {
       const keys = [
@@ -56,16 +72,29 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
 
   const handleSubmit = useCallback(() => {
     const isValid = checkValidData(objData);
-    if (isValid) {
-      onSubmit(objData);
-    }
-  }, [checkValidData, objData, onSubmit]);
+    if (isValid) onSubmit({ ...objData, avata });
+  }, [avata, checkValidData, objData, onSubmit]);
 
   useEffect(() => {
-    if (userInfo) setObjData(userInfo);
-    else setObjData(initValue);
-  }, [show, userInfo]);
+    if (userInfo) {
+      setObjData(userInfo);
+    } else setObjData(initValue);
+  }, [show, userInfo, language, genders, roles, language]);
 
+  useEffect(() => {
+    dispatch(actions.getAllCodeStart(['gender', 'role', 'position']));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleReviewImg = (e) => {
+    const file = e.target.files[0];
+    if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
+      const previewImgUrl = URL.createObjectURL(file);
+      setPreviewImgUrl(previewImgUrl);
+      setAvata(file);
+    } else {
+    }
+  };
   return (
     <Modal
       size='lg'
@@ -78,7 +107,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
       <Modal.Header>
         <Modal.Title id='contained-modal-title-vcenter'>
           <div className='title-content'>
-            {userInfo ? 'Edit User Information' : 'Create New User'}
+            <FormattedMessage id={`manageUser.${userInfo ? 'edit' : 'add'}`} />
           </div>
           <div className='title-close-btn'>
             <span className='c-pointer' onClick={handleCloseModal}>
@@ -91,32 +120,38 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
         <div className='container'>
           <div className='row'>
             <Form onChange={handleUpdateData}>
-              <Form.Group className='mb-3' controlId='email'>
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type='email'
-                  placeholder='Enter your email'
-                  defaultValue={objData.email}
-                  readOnly={userInfo ? true : false}
-                />
-                {/* <Form.Text className='text-muted'>
-                    We'll never share your email with anyone else.
-                  </Form.Text> */}
-              </Form.Group>
-              {!userInfo && (
-                <Form.Group className='mb-3' controlId='password'>
-                  <Form.Label>Password</Form.Label>
+              <div className='row mb-3'>
+                <Form.Group
+                  className={`col-${userInfo ? '12' : '6'}`}
+                  controlId='email'
+                >
+                  <Form.Label>Email</Form.Label>
                   <Form.Control
-                    type='password'
-                    placeholder='Enter your password'
-                    defaultValue={objData.password}
+                    type='email'
+                    placeholder='Enter your email'
+                    defaultValue={objData.email}
+                    readOnly={userInfo ? true : false}
                   />
                 </Form.Group>
-              )}
+                {!userInfo && (
+                  <Form.Group className='col-6' controlId='password'>
+                    <Form.Label>
+                      <FormattedMessage id='manageUser.password' />
+                    </Form.Label>
+                    <Form.Control
+                      type='password'
+                      placeholder='Enter your password'
+                      defaultValue={objData.password}
+                    />
+                  </Form.Group>
+                )}
+              </div>
               <div className='row mb-3'>
                 <div className='col-6'>
                   <Form.Group className='' controlId='firstName'>
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label>
+                      <FormattedMessage id='manageUser.firstName' />
+                    </Form.Label>
                     <Form.Control
                       type='text'
                       placeholder='Enter your first name'
@@ -127,7 +162,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                 </div>
                 <div className='col-6'>
                   <Form.Group className='' controlId='lastName'>
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label>
+                      <FormattedMessage id='manageUser.lastName' />
+                    </Form.Label>
                     <Form.Control
                       type='text'
                       placeholder='Enter your last name'
@@ -138,7 +175,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                 </div>
               </div>
               <Form.Group className='mb-3' controlId='address'>
-                <Form.Label>Address</Form.Label>
+                <Form.Label>
+                  <FormattedMessage id='manageUser.address' />
+                </Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Enter your address'
@@ -146,55 +185,131 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                 />
               </Form.Group>
               <div className='row'>
-                <div className='col-6 form-phoneNumber'>
-                  <Form.Group className='mb-3' controlId='phoneNumber'>
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                      type='text'
-                      placeholder='Enter your phone number'
-                      defaultValue={objData.phoneNumber}
-                    />
-                  </Form.Group>
+                <div className='col-6'>
+                  <div className='row'>
+                    <div className='col-6 form-phoneNumber'>
+                      <Form.Group className='mb-3' controlId='phoneNumber'>
+                        <Form.Label>
+                          <FormattedMessage id='manageUser.phoneNumber' />
+                        </Form.Label>
+                        <Form.Control
+                          type='text'
+                          placeholder='Enter your phone number'
+                          defaultValue={objData.phoneNumber}
+                        />
+                      </Form.Group>
+                    </div>
+                    <div className='col-6 form-position'>
+                      <Form.Group className='mb-3' controlId='positionId'>
+                        <Form.Label>
+                          <FormattedMessage id='manageUser.position' />
+                        </Form.Label>
+                        <Form.Select
+                          value={objData.positionId || ''}
+                          onChange={handleUpdateData}
+                        >
+                          {positions &&
+                            positions.length > 0 &&
+                            positions.map((item, idx) => (
+                              <option key={idx} value={item.key}>
+                                {language === LANGUAGES.EN
+                                  ? item.valueEn
+                                  : item.valueVi}
+                              </option>
+                            ))}
+                        </Form.Select>
+                      </Form.Group>
+                    </div>
+                  </div>
                 </div>
                 <div className='col-6 form-sex'>
                   <div className='row'>
                     <div className='col-6'>
-                      <Form.Group className='mb-3' controlId='sex'>
-                        <Form.Label>Sex</Form.Label>
+                      <Form.Group className='mb-3' controlId='gender'>
+                        <Form.Label>
+                          <FormattedMessage id='manageUser.gender' />
+                        </Form.Label>
                         <Form.Select
                           aria-label='Default select example'
-                          defaultValue={objData.sex}
+                          value={objData?.gender || ''}
+                          onChange={handleUpdateData}
                         >
-                          <option value={1}>Male</option>
-                          <option value={0}>Female</option>
+                          {genders &&
+                            genders.length > 0 &&
+                            genders.map((item, idx) => {
+                              if (idx > 1) return null;
+                              return (
+                                <option key={idx} value={item.key}>
+                                  {language === LANGUAGES.EN
+                                    ? item.valueEn
+                                    : item.valueVi}
+                                </option>
+                              );
+                            })}
                         </Form.Select>
                       </Form.Group>
                     </div>
                     <div className='col-6'>
                       <Form.Group className='mb-3' controlId='roleId'>
-                        <Form.Label>Role</Form.Label>
+                        <Form.Label>
+                          <FormattedMessage id='manageUser.roleId' />
+                        </Form.Label>
                         <Form.Select
+                          onChange={handleUpdateData}
                           aria-label='Default select example'
-                          defaultValue={objData.roleId}
+                          value={objData.roleId || ''}
                         >
-                          <option value={1}>Admin</option>
-                          <option value={2}>Doctor</option>
-                          <option value={3}>Patient</option>
+                          {roles &&
+                            roles.length > 0 &&
+                            roles.map((item, idx) => (
+                              <option key={idx} value={item.key}>
+                                {language === LANGUAGES.EN
+                                  ? item.valueEn
+                                  : item.valueVi}
+                              </option>
+                            ))}
                         </Form.Select>
                       </Form.Group>
                     </div>
                   </div>
                 </div>
               </div>
+              <Form.Group controlId='avata' className='upload-area'>
+                <Form.Control
+                  name='avata'
+                  type='file'
+                  // required
+                  hidden
+                  onChange={handleReviewImg}
+                  // isInvalid={!!errors.file}
+                />
+                <Form.Label>
+                  <FormattedMessage id='manageUser.image' />
+                </Form.Label>
+                <div className='upload-btn'>
+                  <Form.Label>
+                    <i className='fas fa-arrow-circle-up'></i>
+                    <FormattedMessage id='manageUser.upload' />
+                  </Form.Label>
+                </div>
+                <div
+                  className='preview-img'
+                  // onClick={this.handleShowImg}
+                >
+                  <ImageComponent src={previewImgUrl} />
+                </div>
+              </Form.Group>
             </Form>
           </div>
           <div className='err-msg'>{errMSG}</div>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button onClick={handleSubmit}>
+          <FormattedMessage id='button.save' />
+        </Button>
         <Button variant='secondary' onClick={handleCloseModal}>
-          Close
+          <FormattedMessage id='button.close' />
         </Button>
       </Modal.Footer>
     </Modal>

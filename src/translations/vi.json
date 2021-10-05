@@ -69,7 +69,9 @@
         }
     },
     "manageUser": {
+        "title": "Quản lý người dùng",
         "add": "Thêm mới người dùng",
+        "edit": "Chỉnh sửa người dùng",
         "password": "Mật khẩu",
         "firstName": "Tên",
         "lastName": "Họ",
@@ -80,6 +82,12 @@
         "roleId": "Vai trò",
         "image": "Ảnh đại diện",
         "upload": "Tải ảnh",
-        "save": "Lưu user"
+        "action": "Hành động",
+        "addSuccess": "Thêm mới người dùng thành công",
+        "editSuccess": "Chỉnh sửa người dùng thành công"
+    },
+    "button": {
+        "save": "Lưu",
+        "close": "Đóng"
     }
 }

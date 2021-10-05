@@ -18,7 +18,7 @@ import System from '../routes/System';
 import './App.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { CustomToastCloseButton } from '../components/CustomToast';
+// import { CustomToastCloseButton } from '../components/CustomToast';
 import Login from './Auth/Login';
 import HomePage from './HomePage/HomePage';
 import CustomScrollbars from 'components/CustomScrollbars';

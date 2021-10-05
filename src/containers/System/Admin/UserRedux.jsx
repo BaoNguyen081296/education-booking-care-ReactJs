@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import './UserRedux.scss';
 import * as actions from 'store/actions';
 import ImageComponent from 'components/ImageComponent';

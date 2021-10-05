@@ -69,7 +69,9 @@
         }
     },
     "manageUser": {
+        "title": "Manage User",
         "add": "Add a new user",
+        "edit": "Edit user",
         "password": "Password",
         "firstName": "First name",
         "lastName": "Last name",
@@ -77,9 +79,16 @@
         "address": "Address",
         "gender": "Gender",
         "position": "Position",
-        "roleId": "Role Id",
+        "roleId": "Role",
         "image": "Avata",
         "upload": "Upload file",
-        "save": "Save"
+        "save": "Save",
+        "action": "Action",
+        "addSuccess": "Add user success",
+        "editSuccess": "Edit user success"
+    },
+    "button": {
+        "save": "Save",
+        "close": "Close"
     }
 }
