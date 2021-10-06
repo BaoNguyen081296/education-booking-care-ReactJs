@@ -50,7 +50,10 @@ class UserManage extends Component {
   }
 
   closeModal = () => {
-    this.setState({ show: false, userInfo: null });
+    this.setState({ show: false });
+    setTimeout(() => {
+      this.setState({ userInfo: null });
+    }, 300);
   };
 
   handleSubmit = async (data) => {
@@ -163,6 +166,7 @@ class UserManage extends Component {
                       <i className='fas fa-user-edit'></i>
                     </Button>
                     <Button
+                      disabled
                       variant='danger'
                       onClick={() => {
                         this.handleDeleteUser(item.id);
