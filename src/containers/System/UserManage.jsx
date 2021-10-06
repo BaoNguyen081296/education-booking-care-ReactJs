@@ -28,7 +28,7 @@ class UserManage extends Component {
         gender: '',
         position: '',
         role: '',
-        avata: '',
+        image: '',
       },
     };
   }
@@ -55,16 +55,15 @@ class UserManage extends Component {
 
   handleSubmit = async (data) => {
     try {
-      console.log('data: ', data);
       let res = null;
       let type = null;
       if (data && data.id) {
         type = 'editSuccess';
-        // res = await editUser(data);
+        res = await editUser(data);
       }
       if (data && !data.id) {
         type = 'addSuccess';
-        // res = await createNewUser(data);
+        res = await createNewUser(data);
       }
       if (res) {
         const { errCode, message } = res;
@@ -91,6 +90,10 @@ class UserManage extends Component {
       if (res) {
         const { errCode } = res;
         if (errCode === 0) {
+          showToast(
+            this.props.intl.formatMessage({ id: `manageUser.deleteSuccess` }),
+            'success'
+          );
           this.getAllUsersFromUserManage();
         }
       }
@@ -98,7 +101,6 @@ class UserManage extends Component {
       console.log('error: ', error);
     }
   };
-
   render() {
     return (
       <div className='user-manage'>

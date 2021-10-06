@@ -6,6 +6,7 @@ import ImageComponent from 'components/ImageComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from 'store/actions';
 import { LANGUAGES } from 'utils';
+import { toBase64 } from 'utils/utils';
 
 // import useDebounce from 'hooks/useDebounce';
 const initValue = {
@@ -18,7 +19,7 @@ const initValue = {
   gender: '',
   roleId: '',
   positionId: '',
-  avata: '',
+  image: '',
 };
 const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
   const language = useSelector((state) => state.app.language);
@@ -72,13 +73,24 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
 
   const handleSubmit = useCallback(() => {
     const isValid = checkValidData(objData);
-    if (isValid) onSubmit({ ...objData, avata });
+    if (isValid) onSubmit({ ...objData, image: avata });
   }, [avata, checkValidData, objData, onSubmit]);
 
   useEffect(() => {
     if (userInfo) {
       setObjData(userInfo);
-    } else setObjData(initValue);
+      if (userInfo.image) {
+        const imageBase64 = new Buffer(userInfo.image, 'base64').toString(
+          'binary'
+        );
+        setPreviewImgUrl(imageBase64);
+        setAvata(imageBase64);
+      }
+    } else {
+      setObjData(initValue);
+      setPreviewImgUrl('');
+      setAvata('');
+    }
   }, [show, userInfo, language, genders, roles, language]);
 
   useEffect(() => {
@@ -86,12 +98,12 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleReviewImg = (e) => {
+  const handleReviewImg = async (e) => {
     const file = e.target.files[0];
     if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
       const previewImgUrl = URL.createObjectURL(file);
       setPreviewImgUrl(previewImgUrl);
-      setAvata(file);
+      setAvata(await toBase64(file));
     } else {
     }
   };
@@ -274,9 +286,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                   </div>
                 </div>
               </div>
-              <Form.Group controlId='avata' className='upload-area'>
+              <Form.Group controlId='image' className='upload-area'>
                 <Form.Control
-                  name='avata'
+                  name='image'
                   type='file'
                   // required
                   hidden
