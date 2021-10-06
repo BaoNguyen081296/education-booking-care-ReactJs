@@ -26,9 +26,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
         lastName: '',
         address: '',
         phoneNumber: '',
-        gender: genders[0].key,
-        roleId: roles[0].key,
-        positionId: positions[0].key,
+        gender: genders[0].keyMap,
+        roleId: roles[0].keyMap,
+        positionId: positions[0].keyMap,
         image: '',
       };
     return {};
@@ -88,9 +88,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
     if (userInfo) {
       let user = { ...userInfo };
       if (genders.length > 0 && roles.length > 0 && positions.length > 0) {
-        if (!user.positionId) user.positionId = positions[0].key;
-        if (!user.roleId) user.roleId = roles[0].key;
-        if (!user.gender) user.gender = genders[0].key;
+        if (!user.positionId) user.positionId = positions[0].keyMap;
+        if (!user.roleId) user.roleId = roles[0].keyMap;
+        if (!user.gender) user.gender = genders[0].keyMap;
       }
       setObjData(user);
       if (userInfo.image) {
@@ -237,7 +237,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                           {positions &&
                             positions.length > 0 &&
                             positions.map((item, idx) => (
-                              <option key={idx} value={item.key}>
+                              <option key={idx} value={item.keyMap}>
                                 {language === LANGUAGES.EN
                                   ? item.valueEn
                                   : item.valueVi}
@@ -265,7 +265,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                             genders.map((item, idx) => {
                               if (idx > 1) return null;
                               return (
-                                <option key={idx} value={item.key}>
+                                <option key={idx} value={item.keyMap}>
                                   {language === LANGUAGES.EN
                                     ? item.valueEn
                                     : item.valueVi}
@@ -288,7 +288,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
                           {roles &&
                             roles.length > 0 &&
                             roles.map((item, idx) => (
-                              <option key={idx} value={item.key}>
+                              <option key={idx} value={item.keyMap}>
                                 {language === LANGUAGES.EN
                                   ? item.valueEn
                                   : item.valueVi}

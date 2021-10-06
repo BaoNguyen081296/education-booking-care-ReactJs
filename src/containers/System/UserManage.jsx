@@ -76,7 +76,7 @@ class UserManage extends Component {
           this.setState({ show: false, userInfo: null });
           // emmiter.emit()
         } else {
-          alert(message);
+          showToast(message);
         }
       }
     } catch (e) {

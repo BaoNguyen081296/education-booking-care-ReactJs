@@ -121,9 +121,9 @@ class UserRedux extends Component {
       this.setState({
         userData: {
           ...this.state.userData,
-          gender: genders[0].key,
-          role: roles[0].key,
-          position: positions[0].key,
+          gender: genders[0].keyMap,
+          role: roles[0].keyMap,
+          position: positions[0].keyMap,
         },
       });
     }
@@ -201,7 +201,9 @@ class UserRedux extends Component {
                 <Form.Group
                   as={Col}
                   controlId='gender'
-                  defaultValue={genders && genders.length > 0 && genders[0].key}
+                  defaultValue={
+                    genders && genders.length > 0 && genders[0].keyMap
+                  }
                 >
                   <Form.Label>
                     <FormattedMessage id='manageUser.gender' />
@@ -212,7 +214,7 @@ class UserRedux extends Component {
                       genders.map((item, idx) => {
                         if (idx > 1) return null;
                         return (
-                          <option key={idx} value={item.key}>
+                          <option key={idx} value={item.keyMap}>
                             {language === LANGUAGES.EN
                               ? item.valueEn
                               : item.valueVi}
@@ -226,7 +228,7 @@ class UserRedux extends Component {
                   as={Col}
                   controlId='position'
                   defaultValue={
-                    positions && positions.length > 0 && positions[0].key
+                    positions && positions.length > 0 && positions[0].keyMap
                   }
                 >
                   <Form.Label>
@@ -236,7 +238,7 @@ class UserRedux extends Component {
                     {positions &&
                       positions.length > 0 &&
                       positions.map((item, idx) => (
-                        <option key={idx} value={item.key}>
+                        <option key={idx} value={item.keyMap}>
                           {language === LANGUAGES.EN
                             ? item.valueEn
                             : item.valueVi}
@@ -247,7 +249,7 @@ class UserRedux extends Component {
                 <Form.Group
                   as={Col}
                   controlId='roleId'
-                  defaultValue={roles && roles.length > 0 && roles[0].key}
+                  defaultValue={roles && roles.length > 0 && roles[0].keyMap}
                 >
                   <Form.Label>
                     <FormattedMessage id='manageUser.roleId' />
@@ -256,7 +258,7 @@ class UserRedux extends Component {
                     {roles &&
                       roles.length > 0 &&
                       roles.map((item, idx) => (
-                        <option key={idx} value={item.key}>
+                        <option key={idx} value={item.keyMap}>
                           {language === LANGUAGES.EN
                             ? item.valueEn
                             : item.valueVi}

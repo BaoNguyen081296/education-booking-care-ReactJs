@@ -17,6 +17,11 @@ const urls = {
   admin: {
     login: '/admin/login',
   },
+  doctor: {
+    home: {
+      topDoctor: '/doctor',
+    },
+  },
 };
 
 export default urls;

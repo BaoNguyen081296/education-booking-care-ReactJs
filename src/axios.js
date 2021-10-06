@@ -1,5 +1,6 @@
 import axios from 'axios';
 import urls from 'configs/urls';
+import { showToast } from 'utils/utils';
 // import _ from 'lodash';
 // import config from './config';
 
@@ -55,9 +56,9 @@ instance.interceptors.response.use(
     return data;
   },
   (err) => {
-    console.log('err.respone: ', err.respone);
     if (err && err.response?.data) {
       console.log('err: ', err.response.data);
+      showToast(err.response.data);
       return err.response.data;
     }
   }
