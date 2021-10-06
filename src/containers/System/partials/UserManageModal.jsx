@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import './UserManageModal.scss';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -9,18 +9,7 @@ import { LANGUAGES } from 'utils';
 import { toBase64 } from 'utils/utils';
 
 // import useDebounce from 'hooks/useDebounce';
-const initValue = {
-  email: '',
-  password: '',
-  firstName: '',
-  lastName: '',
-  address: '',
-  phoneNumber: '',
-  gender: '',
-  roleId: '',
-  positionId: '',
-  image: '',
-};
+
 const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
   const language = useSelector((state) => state.app.language);
   const genders = useSelector((state) => state.admin.genders);
@@ -28,6 +17,22 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
   const positions = useSelector((state) => state.admin.positions);
   const dispatch = useDispatch();
   const [errMSG, setErrMSG] = useState(null);
+  const initValue = useMemo(() => {
+    if (genders.length > 0 && roles.length > 0 && positions.length > 0)
+      return {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phoneNumber: '',
+        gender: genders[0].key,
+        roleId: roles[0].key,
+        positionId: positions[0].key,
+        image: '',
+      };
+    return {};
+  }, [genders, positions, roles]);
   const [objData, setObjData] = useState(initValue);
   const [previewImgUrl, setPreviewImgUrl] = useState('');
   const [avata, setAvata] = useState('');
@@ -41,6 +46,9 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
         { key: 'lastName', msg: 'Last name' },
         { key: 'address', msg: 'Address' },
         { key: 'phoneNumber', msg: 'Phone number' },
+        { key: 'gender', msg: 'gender' },
+        { key: 'roleId', msg: 'roleId' },
+        { key: 'positionId', msg: 'positionId' },
       ];
       for (let i = 0; i < keys.length; i++) {
         const { key, msg } = keys[i];
@@ -69,7 +77,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
       setErrMSG(null);
       setObjData(initValue);
     }, 300);
-  }, [closeModal]);
+  }, [closeModal, initValue]);
 
   const handleSubmit = useCallback(() => {
     const isValid = checkValidData(objData);
@@ -78,7 +86,13 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
 
   useEffect(() => {
     if (userInfo) {
-      setObjData(userInfo);
+      let user = { ...userInfo };
+      if (genders.length > 0 && roles.length > 0 && positions.length > 0) {
+        if (!user.positionId) user.positionId = positions[0].key;
+        if (!user.roleId) user.roleId = roles[0].key;
+        if (!user.gender) user.gender = genders[0].key;
+      }
+      setObjData(user);
       if (userInfo.image) {
         const imageBase64 = new Buffer(userInfo.image, 'base64').toString(
           'binary'
@@ -91,7 +105,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
       setPreviewImgUrl('');
       setAvata('');
     }
-  }, [show, userInfo, language, genders, roles, language]);
+  }, [show, userInfo, language, genders, roles, positions, initValue]);
 
   useEffect(() => {
     dispatch(actions.getAllCodeStart(['gender', 'role', 'position']));
