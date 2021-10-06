@@ -84,8 +84,9 @@
         "upload": "Upload file",
         "save": "Save",
         "action": "Action",
-        "addSuccess": "Add user success",
-        "editSuccess": "Edit user success"
+        "addSuccess": "Add user succeed!",
+        "editSuccess": "Edit user succeed!",
+        "deleteSuccess": "Delete user succeed!"
     },
     "button": {
         "save": "Save",
