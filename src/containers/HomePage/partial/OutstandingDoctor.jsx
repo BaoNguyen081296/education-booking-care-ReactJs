@@ -1,5 +1,5 @@
 import ImageComponent from 'components/ImageComponent';
-import React from 'react';
+import React, { useEffect } from 'react';
 import HomeSlider from '../components/HomeSlider';
 import imgSrc from 'assets/images/img_avatar.png';
 
@@ -9,6 +9,9 @@ export default function OutstandingDoctor({ isGray = false }) {
     name: 'PGS, TS, Giảng viên cao cấp Trần Hữu Bình',
     specialist: 'Ngoại thần kinh',
   }));
+
+  useEffect(() => {}, []);
+
   return (
     <div className={`_outstanding-doctor ${isGray && 'gray-area'}`}>
       <div className='_home-container page-container'>

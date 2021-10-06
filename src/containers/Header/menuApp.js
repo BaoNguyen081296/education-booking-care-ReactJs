@@ -1,4 +1,4 @@
-import { path } from 'utils';
+import { paths } from 'configs/paths';
 
 export const adminMenu = [
   {
@@ -7,29 +7,29 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.crud',
-        link: path.SYSTEM.USER_MANAGE,
+        link: paths.SYSTEM.USER_MANAGE,
       },
       {
         name: 'menu.admin.crudRedux',
-        link: path.SYSTEM.USER_REDUX,
+        link: paths.SYSTEM.USER_REDUX,
       },
       {
         name: 'menu.admin.manageDoctor',
-        link: path.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.USER_DOCTOR,
         // subMenus: [
         //   {
         //     name: 'menu.system.system-administrator.userManage',
-        //     link: path.SYSTEM.USER_MANAGE,
+        //     link: paths.SYSTEM.USER_MANAGE,
         //   },
         //   {
         //     name: 'menu.system.system-administrator.userRedux',
-        //     link: path.SYSTEM.USER_REDUX,
+        //     link: paths.SYSTEM.USER_REDUX,
         //   },
         // ],
       },
       {
         name: 'menu.admin.manageAdmin',
-        link: path.SYSTEM.USER_ADMIN,
+        link: paths.SYSTEM.USER_ADMIN,
       },
     ],
   },
@@ -39,7 +39,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.manageClinic',
-        link: path.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.USER_DOCTOR,
       },
     ],
   },
@@ -49,7 +49,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.manageHandbook',
-        link: path.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.USER_DOCTOR,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.specialty',
-        link: path.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.USER_DOCTOR,
       },
     ],
   },
