@@ -16,9 +16,11 @@ export const getAllUsers = (id) => {
 export const editUser = (data) => {
   return axios.put(data.id ? urls.user.update : urls.user.create, data);
 };
+
 export const createNewUser = (data) => {
   return axios.post(urls.user.create, data);
 };
+
 export const deleteUser = (id) => {
   return axios.delete(urls.user.delete, { data: { id } });
 };
@@ -27,6 +29,14 @@ export const getAllCode = (type) => {
   return axios.get(urls.user.allcode, {
     params: {
       type,
+    },
+  });
+};
+
+export const getTopDoctorHome = (limit) => {
+  return axios.get(urls.doctor.home.topDoctor, {
+    params: {
+      limit,
     },
   });
 };

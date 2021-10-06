@@ -6,7 +6,7 @@ import ImageComponent from 'components/ImageComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from 'store/actions';
 import { LANGUAGES } from 'utils';
-import { toBase64 } from 'utils/utils';
+import { deCodeBase64, toBase64 } from 'utils/utils';
 
 // import useDebounce from 'hooks/useDebounce';
 
@@ -94,9 +94,7 @@ const UserManageModal = ({ show = false, onSubmit, userInfo, closeModal }) => {
       }
       setObjData(user);
       if (userInfo.image) {
-        const imageBase64 = new Buffer(userInfo.image, 'base64').toString(
-          'binary'
-        );
+        const imageBase64 = deCodeBase64(userInfo.image);
         setPreviewImgUrl(imageBase64);
         setAvata(imageBase64);
       }

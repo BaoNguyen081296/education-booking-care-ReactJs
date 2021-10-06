@@ -32,7 +32,7 @@ export default function HomeSlider({
       {items.length &&
         items.map((item, idx) => (
           <div key={idx} className='item' onClick={() => onClick(item)}>
-            {img}
+            {item.img || img}
             <div className='item-child1'>{item.name}</div>
             {item.specialist && (
               <div className='item-child2'>{item.specialist}</div>
