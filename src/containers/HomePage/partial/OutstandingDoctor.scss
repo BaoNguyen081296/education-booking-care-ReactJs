@@ -1,7 +1,12 @@
 ._outstanding-doctor {
     ._outstanding-doctor-slider {
+        .slick-slide > div {
+            padding: 10px;
+        }
         .item {
+            border: 1px solid rgba(94, 88, 88, 0.212) !important;
             text-align: center;
+            padding: 10px;
             &:hover {
                 .item-child2 {
                     color: black;

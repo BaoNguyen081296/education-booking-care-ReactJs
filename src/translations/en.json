@@ -12,7 +12,7 @@
         "welcome": "Welcome"
     },
     "homeBanner": {
-        "title1": "MEDICAL BACKGROUND",
+        "title1": "MEDICAL PLATFORM",
         "title2": "COMPREHENSIVE HEALTH CARE",
         "inputPlaceholder": "Find a medical specialty",
         "bottomContent": {
@@ -90,6 +90,12 @@
     },
     "button": {
         "save": "Save",
-        "close": "Close"
+        "close": "Close",
+        "more": "More info"
+    },
+    "homePage": {
+        "outStandingDoctor": {
+            "title": "Outstanding doctor"
+        }
     }
 }

@@ -89,6 +89,12 @@
     },
     "button": {
         "save": "Lưu",
-        "close": "Đóng"
+        "close": "Đóng",
+        "more": "Xem thêm"
+    },
+    "homePage": {
+        "outStandingDoctor": {
+            "title": "Bác sỹ nổi bật tuần qua"
+        }
     }
 }

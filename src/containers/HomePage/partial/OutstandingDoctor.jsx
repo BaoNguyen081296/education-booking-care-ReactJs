@@ -8,6 +8,7 @@ import { getTopDoctorHome } from 'services/userService';
 import { useSelector } from 'react-redux';
 import { LANGUAGES } from 'utils';
 import { deCodeBase64 } from 'utils/utils';
+import { FormattedMessage } from 'react-intl';
 const PER_PAGE = 10;
 export default function OutstandingDoctor({ isGray = false }) {
   const language = useSelector((state) => state.app.language);
@@ -25,9 +26,8 @@ export default function OutstandingDoctor({ isGray = false }) {
 
   useEffect(() => {
     if (doctors && doctors.length > 0) {
-      console.log('doctors: ', doctors);
       const data = doctors.map((item, idx) => {
-        const { lastName, firstName, positionId, image } = item;
+        const { lastName, firstName, image } = item;
         const { valueEn, valueVi } = item.positionData;
         const img = (
           <div className='slider-img'>
@@ -39,9 +39,7 @@ export default function OutstandingDoctor({ isGray = false }) {
         if (language === LANGUAGES.VI) {
           name = `${valueVi} ${lastName} ${firstName}`;
         } else {
-          name = `${
-            positionId === 'P0' ? '' : valueEn
-          } ${firstName} ${lastName}`.trim();
+          name = `${valueEn} ${firstName} ${lastName}`.trim();
         }
         return { name, img, specialist: 'Ngoại thần kinh' };
       });
@@ -53,9 +51,13 @@ export default function OutstandingDoctor({ isGray = false }) {
     <div className={`_outstanding-doctor ${isGray && 'gray-area'}`}>
       <div className='_home-container page-container'>
         <div className='_home-header'>
-          <div className='header-title'>Bác sĩ nổi bật tuần qua</div>
+          <div className='header-title'>
+            <FormattedMessage id='homePage.outStandingDoctor.title' />
+          </div>
           <div className=''>
-            <button className='header-btn'>Tìm kiếm</button>
+            <button className='header-btn'>
+              <FormattedMessage id='button.more' />
+            </button>
           </div>
         </div>
         {dataSlider && dataSlider.length > 0 && (
