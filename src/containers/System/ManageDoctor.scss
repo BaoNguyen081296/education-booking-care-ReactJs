@@ -1,0 +1,28 @@
+._manage-doctor {
+    ._manage-doctor-footer {
+        margin-top: 1rem;
+        text-align: right;
+    }
+    .info-area {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        p {
+            margin-bottom: 0.1rem;
+        }
+        .select-doctor {
+            flex-basis: 38%;
+        }
+        .text-area {
+            flex: 0 1 60%;
+            textarea:focus {
+                border: 1px solid #2684ff;
+                box-shadow: 0 0 0 1px #2684ff;
+            }
+        }
+    }
+    .sec-html {
+        cursor: not-allowed;
+        user-select: none;
+    }
+}

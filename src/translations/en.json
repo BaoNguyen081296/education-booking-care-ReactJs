@@ -1,4 +1,14 @@
 {
+    "button": {
+        "save": "Save",
+        "close": "Close",
+        "more": "More info"
+    },
+    "homePage": {
+        "outStandingDoctor": {
+            "title": "Outstanding doctor"
+        }
+    },
     "homeHeader": {
         "speciality": "Medical specialty",
         "searchDoctor": "Find a doctor by specialty",
@@ -87,15 +97,5 @@
         "addSuccess": "Add user succeed!",
         "editSuccess": "Edit user succeed!",
         "deleteSuccess": "Delete user succeed!"
-    },
-    "button": {
-        "save": "Save",
-        "close": "Close",
-        "more": "More info"
-    },
-    "homePage": {
-        "outStandingDoctor": {
-            "title": "Outstanding doctor"
-        }
     }
 }

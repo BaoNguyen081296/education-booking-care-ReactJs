@@ -6,6 +6,7 @@ import { paths } from 'configs/paths';
 import UserRedux from 'containers/System/Admin/UserRedux';
 import Header from 'containers/Header/Header.jsx';
 import './System.scss';
+import ManageDoctor from 'containers/System/ManageDoctor';
 class System extends Component {
   render() {
     const { systemMenuPath } = this.props;
@@ -17,6 +18,11 @@ class System extends Component {
             <Switch>
               <Route path={paths.SYSTEM.USER_MANAGE} component={UserManage} />
               <Route path={paths.SYSTEM.USER_REDUX} component={UserRedux} />
+              <Route
+                path={paths.SYSTEM.DOCTOR_MANAGE}
+                component={ManageDoctor}
+              />
+              {/* <Route path={paths.SYSTEM.USER_REDUX} component={UserRedux} /> */}
               <Route component={() => <Redirect to={systemMenuPath} />} />
             </Switch>
           </div>

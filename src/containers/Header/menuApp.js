@@ -15,7 +15,7 @@ export const adminMenu = [
       },
       {
         name: 'menu.admin.manageDoctor',
-        link: paths.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.DOCTOR_MANAGE,
         // subMenus: [
         //   {
         //     name: 'menu.system.system-administrator.userManage',
@@ -39,7 +39,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.manageClinic',
-        link: paths.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.CLINIC_MANAGE,
       },
     ],
   },
@@ -49,7 +49,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.manageHandbook',
-        link: paths.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.HANDBOOK_MANAGE,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const adminMenu = [
     menus: [
       {
         name: 'menu.admin.specialty',
-        link: paths.SYSTEM.USER_DOCTOR,
+        link: paths.SYSTEM.SPECIALTY_MANAGE,
       },
     ],
   },
