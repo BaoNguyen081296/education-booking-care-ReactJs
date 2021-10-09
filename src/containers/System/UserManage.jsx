@@ -11,7 +11,6 @@ import './UserManage.scss';
 import { Button } from 'react-bootstrap';
 import UserManageModal from './partials/UserManageModal';
 import { showToast } from 'utils/utils';
-import MarkdownComponent from 'containers/HomePage/components/MarkdownComponent';
 // import { emmiter } from 'utils/emitter';
 class UserManage extends Component {
   constructor(props) {
@@ -180,7 +179,6 @@ class UserManage extends Component {
               ))}
             </tbody>
           </table>
-          <MarkdownComponent />
         </div>
         <UserManageModal
           {...{

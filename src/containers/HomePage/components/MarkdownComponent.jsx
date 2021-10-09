@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useCallback } from 'react';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
@@ -12,10 +11,13 @@ import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
-function handleEditorChange({ html, text }) {
-  console.log('handleEditorChange', html, text);
-}
-export default function MarkdownComponent() {
+function MarkdownComponent({ onChange }) {
+  const handleEditorChange = useCallback(
+    ({ html, text }) => {
+      onChange({ html, text });
+    },
+    [onChange]
+  );
   return (
     <MdEditor
       style={{ height: '500px' }}
@@ -24,3 +26,4 @@ export default function MarkdownComponent() {
     />
   );
 }
+export default MarkdownComponent;
