@@ -61,7 +61,7 @@ export default function HomeBanner() {
           {/* End top content */}
           {/* Bottom content */}
           <div className='_home-banner-bottom'>
-            <ul>
+            <ul className='list-style-none'>
               {bottomContent.map((item, idx) => {
                 const backgound =
                   require(`../../../assets/icons/icon-banner/icon-banner-${
