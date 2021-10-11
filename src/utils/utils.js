@@ -1,3 +1,4 @@
+import { useIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 
 export const showToast = (toastContent, toastConfig = 'error') => {
@@ -25,3 +26,8 @@ export const toBase64 = (file) =>
 export const deCodeBase64 = (data) => {
   return new Buffer(data, 'base64').toString('binary');
 };
+export default function formatMessageInt(id) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const int = useIntl();
+  return int.formatMessage({ id });
+}
