@@ -40,3 +40,11 @@ export const getTopDoctorHome = (limit) => {
     },
   });
 };
+
+export const getDoctorList = () => {
+  return axios.get(urls.doctor.list);
+};
+
+export const saveDetailDoctor = (data) => {
+  return axios.post(urls.doctor.saveInfo, data);
+};

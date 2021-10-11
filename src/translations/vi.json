@@ -96,5 +96,12 @@
         "addSuccess": "Thêm mới người dùng thành công",
         "editSuccess": "Chỉnh sửa người dùng thành công",
         "deleteSuccess": "Xóa người dùng thành công"
+    },
+    "manageDoctor": {
+        "selectDoctor": "Chọn bác sĩ",
+        "msgSelectDoctor": "Vui lòng chọn bác sĩ!",
+        "description": "Thông tin giới thiệu",
+        "saveSuccess": "Lưu thông tin bác sĩ thành công",
+        "saveFail": "Lưu thông tin bác sĩ thất bại"
     }
 }

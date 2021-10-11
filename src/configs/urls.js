@@ -21,6 +21,8 @@ const urls = {
     home: {
       topDoctor: '/doctor',
     },
+    list: '/doctor/list',
+    saveInfo: '/doctor/info-save',
   },
 };
 

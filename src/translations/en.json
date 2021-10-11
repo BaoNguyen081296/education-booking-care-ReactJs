@@ -97,5 +97,12 @@
         "addSuccess": "Add user succeed!",
         "editSuccess": "Edit user succeed!",
         "deleteSuccess": "Delete user succeed!"
+    },
+    "manageDoctor": {
+        "selectDoctor": "Select a doctor",
+        "msgSelectDoctor": "Doctor is required!",
+        "description": "Description",
+        "saveSuccess": "Save doctor information successfully",
+        "saveFail": "Save doctor information failed"
     }
 }
