@@ -37,23 +37,23 @@ function ManageDoctor() {
       return;
     }
     try {
-      // const res = await saveDetailDoctor({
-      //   contentHTML: markdownData.html,
-      //   contentMarkdown: markdownData.text,
-      //   description,
-      //   doctorId: selectedDoctor.id,
-      // });
-      // if (res && res.errCode === 0) {
-      //   showToast(
-      //     <FormatMessageComponent id='manageDoctor.saveSuccess' />,
-      //     'success'
-      //   );
-      // } else {
-      //   showToast(
-      //     <FormatMessageComponent id='manageDoctor.saveSuccess' />,
-      //     'success'
-      //   );
-      // }
+      const res = await saveDetailDoctor({
+        contentHTML: markdownData.html,
+        contentMarkdown: markdownData.text,
+        description,
+        doctorId: selectedDoctor.id,
+      });
+      if (res && res.errCode === 0) {
+        showToast(
+          <FormatMessageComponent id='manageDoctor.saveSuccess' />,
+          'success'
+        );
+      } else {
+        showToast(
+          <FormatMessageComponent id='manageDoctor.saveSuccess' />,
+          'success'
+        );
+      }
     } catch (error) {
       console.log('error: ', error);
     }
