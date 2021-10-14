@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import FlagLanguage from 'components/FlagLanguage';
-export default function HomeHeader() {
+function HomeHeader() {
   return (
     <div className='_home-page-header'>
       <div className='_home-page-header-container'>
@@ -74,3 +74,4 @@ export default function HomeHeader() {
     </div>
   );
 }
+export default memo(HomeHeader);
