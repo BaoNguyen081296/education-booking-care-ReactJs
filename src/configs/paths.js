@@ -16,5 +16,6 @@ export const paths = {
   },
   DOCTOR: {
     DETAIL: '/doctor',
+    MANAGE_SCHEDULE: '/doctor/mange-schedule',
   },
 };

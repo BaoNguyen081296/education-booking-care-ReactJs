@@ -22,6 +22,11 @@ class System extends Component {
                 path={paths.SYSTEM.DOCTOR_MANAGE}
                 component={ManageDoctor}
               />
+              <Route
+                path={paths.DOCTOR.MANAGE_SCHEDULE}
+                component={ManageDoctor}
+              />
+
               {/* <Route path={paths.SYSTEM.USER_REDUX} component={UserRedux} /> */}
               <Route component={() => <Redirect to={systemMenuPath} />} />
             </Switch>
