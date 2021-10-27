@@ -48,3 +48,14 @@ export const getDoctorList = () => {
 export const saveDetailDoctor = (data) => {
   return axios.post(urls.doctor.saveInfo, data);
 };
+
+export const getDoctorInforById = (id) => {
+  return axios.get(urls.doctor.detail, {
+    params: { id },
+  });
+};
+export const getMarkdownDataById = (id) => {
+  return axios.get(urls.doctor.markdown, {
+    params: { id },
+  });
+};

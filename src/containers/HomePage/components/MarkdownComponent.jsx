@@ -11,7 +11,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
-function MarkdownComponent({ onChange }) {
+function MarkdownComponent({ onChange, value = '' }) {
   const handleEditorChange = useCallback(
     ({ html, text }) => {
       onChange({ html, text });
@@ -20,6 +20,7 @@ function MarkdownComponent({ onChange }) {
   );
   return (
     <MdEditor
+      value={value}
       style={{ height: '500px' }}
       renderHTML={(text) => mdParser.render(text)}
       onChange={handleEditorChange}

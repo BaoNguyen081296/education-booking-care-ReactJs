@@ -1,0 +1,37 @@
+@import '../../../styles/variables';
+._detail-doctor {
+    margin-top: $height-header;
+    padding-top: 2rem;
+    &-title {
+        border-bottom: 1px solid #ccc;
+        padding: 2rem 0;
+        .doctor-title {
+            &-wrapper {
+                display: flex;
+                gap: 0 2rem;
+            }
+            &-avata {
+                border-radius: 50%;
+                overflow: hidden;
+                height: 10rem;
+                width: 10rem;
+                img {
+                    width: 100%;
+                }
+            }
+            &-content {
+                flex: 0 1 80%;
+            }
+        }
+    }
+    &-schedule {
+        background-color: #f9f9f9;
+        padding-top: 2rem;
+        ul {
+            padding-left: 2rem !important;
+        }
+        h5 {
+            margin-top: 1.5rem;
+        }
+    }
+}

@@ -7,7 +7,11 @@ import { useSelector } from 'react-redux';
 import { LANGUAGES } from 'utils';
 import FormatMessageComponent from 'components/FormatMessageComponent';
 import formatMessageInt, { showToast } from 'utils/utils';
-import { getDoctorList, saveDetailDoctor } from 'services/userService';
+import {
+  getDoctorList,
+  getMarkdownDataById,
+  saveDetailDoctor,
+} from 'services/userService';
 
 function ManageDoctor() {
   const language = useSelector((state) => state.app.language);
@@ -16,7 +20,7 @@ function ManageDoctor() {
   const [description, setDescription] = useState(null);
   const [doctorOptions, setDoctorOptions] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChangeDoctor = (e) => {
     setSelectedDoctor(e);
   };
 
@@ -29,9 +33,6 @@ function ManageDoctor() {
   }, []);
 
   const handleSubmit = useCallback(async () => {
-    console.log('markdownData: ', markdownData);
-    console.log('selectedDoctor: ', selectedDoctor);
-    console.log('doctorInfo: ', description);
     if (!selectedDoctor) {
       showToast(<FormatMessageComponent id='manageDoctor.msgSelectDoctor' />);
       return;
@@ -95,6 +96,19 @@ function ManageDoctor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language, transformDataSelect]);
 
+  useEffect(() => {
+    if (selectedDoctor) {
+      (async () => {
+        const res = await getMarkdownDataById(selectedDoctor.id);
+        if (res && res.errCode === 0 && res.data.Markdown) {
+          const { contentMarkdown, description } = res.data.Markdown;
+          setDescription(description);
+          setMarkdownData({ text: contentMarkdown });
+        }
+      })();
+    }
+  }, [selectedDoctor]);
+
   return (
     <div className='_manage-doctor'>
       <div className='_manage-doctor-wrapper page-container'>
@@ -114,7 +128,7 @@ function ManageDoctor() {
               <Select
                 autoFocus
                 value={selectedDoctor}
-                onChange={handleChange}
+                onChange={handleChangeDoctor}
                 options={doctorOptions}
                 defaultValue={null}
                 placeholder={
@@ -132,11 +146,15 @@ function ManageDoctor() {
               placeholder={formatMessageInt('manageDoctor.description')}
               style={{ height: '100px' }}
               onChange={handleChangeInfo}
+              value={description || ''}
             />
           </div>
         </div>
         <div className='_manage-doctor-markdown'>
-          <MarkdownComponent onChange={handleChangeMarkdown} />
+          <MarkdownComponent
+            onChange={handleChangeMarkdown}
+            value={markdownData?.text || ''}
+          />
         </div>
         <div className='_manage-doctor-footer'>
           <Button onClick={handleSubmit}>

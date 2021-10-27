@@ -21,6 +21,7 @@ import Login from './Auth/Login';
 import HomePage from './HomePage/HomePage';
 import CustomScrollbars from 'components/CustomScrollbars';
 import { paths } from 'configs/paths';
+import DetailDoctor from './Patient/Doctor/DetailDoctor';
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -57,6 +58,11 @@ class App extends Component {
                     component={userIsAuthenticated(System)}
                   />
                   <Route path={paths.HOME_PAGE} component={HomePage} />
+                  <Route
+                    // path={`${paths.DOCTOR.DETAIL}/:id`}
+                    path={`/doctor/:id`}
+                    component={DetailDoctor}
+                  />
                   <Route path={paths.HOME} exact component={Home} />
                 </Switch>
               </CustomScrollbars>

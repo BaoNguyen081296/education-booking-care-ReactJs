@@ -23,6 +23,8 @@ const urls = {
     },
     list: '/doctor/list',
     saveInfo: '/doctor/info-save',
+    detail: '/doctor/detail',
+    markdown: '/doctor/markdown',
   },
 };
 

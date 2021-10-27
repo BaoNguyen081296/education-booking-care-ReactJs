@@ -14,4 +14,7 @@ export const paths = {
     HANDBOOK_MANAGE: '/system/doctor-manage',
     SPECIALTY_MANAGE: '/system/doctor-manage',
   },
+  DOCTOR: {
+    DETAIL: '/doctor',
+  },
 };

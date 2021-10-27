@@ -9,8 +9,11 @@ import { useSelector } from 'react-redux';
 import { LANGUAGES } from 'utils';
 import { deCodeBase64 } from 'utils/utils';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router';
+import { paths } from 'configs/paths';
 const PER_PAGE = 10;
 export default function OutstandingDoctor({ isGray = false }) {
+  const history = useHistory();
   const language = useSelector((state) => state.app.language);
   const [doctors, setDoctors] = useState(null);
   const [dataSlider, setDataSlider] = useState(null);
@@ -41,7 +44,7 @@ export default function OutstandingDoctor({ isGray = false }) {
         } else {
           name = `${valueEn} ${firstName} ${lastName}`.trim();
         }
-        return { name, img, specialist: 'Ngoại thần kinh' };
+        return { name, img, specialist: 'Ngoại thần kinh', id: item.id };
       });
       setDataSlider(data);
     }
@@ -70,7 +73,9 @@ export default function OutstandingDoctor({ isGray = false }) {
                 </div>
               ),
               className: '_outstanding-doctor-slider',
-              onClick: (e) => {},
+              onClick: (e) => {
+                history.push(`${paths.DOCTOR.DETAIL}/${e.id}`);
+              },
             }}
           />
         )}

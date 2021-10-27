@@ -2,7 +2,10 @@ import React, { memo } from 'react';
 import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import FlagLanguage from 'components/FlagLanguage';
+import { useHistory } from 'react-router';
+import { paths } from 'configs/paths';
 function HomeHeader() {
+  const history = useHistory();
   return (
     <div className='_home-page-header'>
       <div className='_home-page-header-container'>
@@ -10,7 +13,10 @@ function HomeHeader() {
           {/* left content */}
           <div className='left-content'>
             <i className='fas fa-bars c-pointer'></i>
-            <div className='header-logo c-pointer'></div>
+            <div
+              className='header-logo c-pointer'
+              onClick={() => history.push(paths.HOME_PAGE)}
+            ></div>
           </div>
           {/* End left content */}
 
